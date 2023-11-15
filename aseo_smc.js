@@ -1,10 +1,6 @@
 import puppeteer from "puppeteer";
 
 export async function aseo_smc(rol,dv){
-
-try{
-
-  // Puppeteer process
   const browser = await puppeteer.launch({
     headless: 'new',
     args: [
@@ -21,6 +17,8 @@ try{
         : puppeteer.executablePath(),
   })
 
+try{
+  // Puppeteer process
   const page = await browser.newPage()
 
   const url=`https://pago.smc.cl/pagoAseov2/muni/la_florida.aspx`
@@ -82,6 +80,7 @@ try{
   }}
   catch (e){
     console.log(e)
+    await browser.close()
     return {data:{
       total_debt_amount: "Error al cargar página",
     }}
